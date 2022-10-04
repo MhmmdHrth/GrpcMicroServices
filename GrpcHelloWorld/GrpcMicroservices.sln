@@ -5,7 +5,11 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcHelloWorldServer", "GrpcHelloWorldServer\GrpcHelloWorldServer.csproj", "{C29E8DA5-C640-4133-ACD2-D0984778F812}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcHelloWorldClient", "GrpcHelloWorldClient\GrpcHelloWorldClient.csproj", "{C1AF3F4B-D021-4A0E-8E2C-B88B524AC0D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GrpcHelloWorldClient", "GrpcHelloWorldClient\GrpcHelloWorldClient.csproj", "{C1AF3F4B-D021-4A0E-8E2C-B88B524AC0D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductGrpc", "ProductGrpc\ProductGrpc.csproj", "{A95324EB-979F-44D5-800E-1371D5DED325}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductGrpcClient", "ProductGrpcClient\ProductGrpcClient.csproj", "{2887C5E3-330F-4046-A9FC-3CBA14AE37F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{C1AF3F4B-D021-4A0E-8E2C-B88B524AC0D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1AF3F4B-D021-4A0E-8E2C-B88B524AC0D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1AF3F4B-D021-4A0E-8E2C-B88B524AC0D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A95324EB-979F-44D5-800E-1371D5DED325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A95324EB-979F-44D5-800E-1371D5DED325}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A95324EB-979F-44D5-800E-1371D5DED325}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A95324EB-979F-44D5-800E-1371D5DED325}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2887C5E3-330F-4046-A9FC-3CBA14AE37F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2887C5E3-330F-4046-A9FC-3CBA14AE37F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2887C5E3-330F-4046-A9FC-3CBA14AE37F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2887C5E3-330F-4046-A9FC-3CBA14AE37F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
