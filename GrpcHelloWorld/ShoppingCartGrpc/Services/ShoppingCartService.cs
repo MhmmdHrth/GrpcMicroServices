@@ -5,7 +5,6 @@ using Microsoft.Extensions.Logging;
 using ShoppingCartGrpc.Data;
 using ShoppingCartGrpc.Models;
 using ShoppingCartGrpc.Protos;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,12 +15,14 @@ namespace ShoppingCartGrpc.Services
         private readonly ShoppingCartContext _context;
         private readonly ILogger<ShoppingCartContext> _logger;
         private readonly IMapper _mapper;
+        private readonly DiscountService _discountService;
 
-        public ShoppingCartService(ShoppingCartContext context, ILogger<ShoppingCartContext> logger, IMapper mapper)
+        public ShoppingCartService(ShoppingCartContext context, ILogger<ShoppingCartContext> logger, IMapper mapper, DiscountService discountService)
         {
             _context = context;
             _logger = logger;
             _mapper = mapper;
+            _discountService = discountService;
         }
 
         public override async Task<ShoppingCartModel> GetShoppingCart(GetShoppingCartRRequest request, ServerCallContext context)
@@ -48,7 +49,9 @@ namespace ShoppingCartGrpc.Services
                     existingCartItem.Quantity += 1;
                 else
                 {
-                    newCartItem.Price -= 100; //discount
+                    var discount = await _discountService.GetDiscount(requestStream.Current.DiscountCode);
+                    newCartItem.Price -= discount.Amount;
+
                     shoppingCart.Items.Add(newCartItem);
                 }
             }
