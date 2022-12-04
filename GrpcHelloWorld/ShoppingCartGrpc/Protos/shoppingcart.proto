@@ -36,8 +36,8 @@ message RemoveItemIntoShoppingCartResponse {
 }
 
 message ShoppingCartModel {
-	string username = 1;
-	repeated ShoppingCartItemModel cardItems = 2;
+	string Username = 1;
+	repeated ShoppingCartItemModel Items = 2;
 }
 
 message ShoppingCartItemModel {

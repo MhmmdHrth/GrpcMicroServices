@@ -7,14 +7,10 @@ namespace ShoppingCartGrpc.Models
     public class ShoppingCart
     {
         public int Id { get; set; }
-        public string UserName { get; set; }
+        public string Username { get; set; }
         public List<ShoppingCartItem> Items { get; set; } = new();
 
         public ShoppingCart()
-        {
-        }
-
-        public ShoppingCart(string userName)
         {
         }
 

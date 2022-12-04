@@ -27,11 +27,13 @@ namespace ShoppingCartGrpc.Services
 
         public override async Task<ShoppingCartModel> GetShoppingCart(GetShoppingCartRRequest request, ServerCallContext context)
         {
-            var shoppingCart = await _context.ShoppingCarts.FirstOrDefaultAsync(x => x.UserName == request.Username, context.CancellationToken);
+            var shoppingCart = await _context.ShoppingCarts
+                                    .Include(x => x.Items)
+                                    .FirstOrDefaultAsync(x => x.Username.Equals(request.Username), context.CancellationToken);
 
             if (shoppingCart == null)
                 throw new RpcException(new Status(StatusCode.NotFound, $"ShoppingCart with UserName={request.Username} can't found"));
-
+            
             return _mapper.Map<ShoppingCartModel>(shoppingCart);
         }
 
@@ -39,7 +41,7 @@ namespace ShoppingCartGrpc.Services
         {
             while(await requestStream.MoveNext())
             {
-                var shoppingCart = await _context.ShoppingCarts.FirstOrDefaultAsync(x => x.UserName.Equals(requestStream.Current.Username), context.CancellationToken);
+                var shoppingCart = await _context.ShoppingCarts.FirstOrDefaultAsync(x => x.Username.Equals(requestStream.Current.Username), context.CancellationToken);
                 if (shoppingCart == null)
                     throw new RpcException(new Status(StatusCode.NotFound, $"shopping cart with username {requestStream.Current.Username} is not found"));
 
@@ -67,7 +69,7 @@ namespace ShoppingCartGrpc.Services
         public override async Task<ShoppingCartModel> CreateShoppingCart(ShoppingCartModel request, ServerCallContext context)
         {
             var shoppingCart = _mapper.Map<ShoppingCart>(request);
-            var isExist = await _context.ShoppingCarts.AnyAsync(x => x.UserName.Equals(request.Username));
+            var isExist = await _context.ShoppingCarts.AnyAsync(x => x.Username.Equals(request.Username));
             if (isExist)
             {
                 _logger.LogError($"Invalid Username For ShoppingCart creation. Username:{request.Username}");
@@ -84,7 +86,7 @@ namespace ShoppingCartGrpc.Services
 
         public override async Task<RemoveItemIntoShoppingCartResponse> RemoveItemIntoShoppingCart(RemoveItemIntoShoppingCartRequest request, ServerCallContext context)
         {
-            var shoppingCart = await _context.ShoppingCarts.FirstOrDefaultAsync(x => x.UserName == request.Username, context.CancellationToken);
+            var shoppingCart = await _context.ShoppingCarts.FirstOrDefaultAsync(x => x.Username == request.Username, context.CancellationToken);
             if (shoppingCart == null)
                 throw new RpcException(new Status(StatusCode.NotFound, $"ShoppingCart with UserName={request.Username} can't found"));
 

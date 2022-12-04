@@ -21,7 +21,7 @@ namespace ShoppingCartGrpc.Data
         {
                 new ShoppingCart
                 {
-                    UserName = "swn",
+                    Username = "swn",
                     Items = new List<ShoppingCartItem>
                     {
                         new ShoppingCartItem
